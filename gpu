@@ -1,0 +1,29 @@
+import pycuda.driver as cuda
+
+# Initialize CUDA
+cuda.init()
+
+# Get the number of available GPU devices
+num_gpus = cuda.Device.count()
+print("Number of available GPUs:", num_gpus)
+
+# Choose the GPU device to configure (e.g., device 0)
+device_idx = 0
+
+# Create a CUDA device object
+device = cuda.Device(device_idx)
+
+# Get device properties
+props = device.get_attributes()
+print("Device Properties:")
+print("  Device name:", cuda.Device.name(), " (ID:", device_idx, ")")
+print("  Compute capability: ", props[cuda.device_attribute.COMPUTE_CAPABILITY_MAJOR], ".", props[cuda.device_attribute.COMPUTE_CAPABILITY_MINOR])
+print("  Total global memory: ", props[cuda.device_attribute.GLOBAL_MEMORY_BYTES]//(1024**3), "GB")
+print("  Total multiprocessors: ", props[cuda.device_attribute.MULTIPROCESSOR_COUNT])
+print("  Maximum threads per block: ", props[cuda.device_attribute.MAX_THREADS_PER_BLOCK])
+print("  Maximum threads per multiprocessor: ", props[cuda.device_attribute.MAX_THREADS_PER_MULTIPROCESSOR])
+print("  Maximum block dimensions: ", props[cuda.device_attribute.MAX_BLOCK_DIM_X], "x", props[cuda.device_attribute.MAX_BLOCK_DIM_Y], "x", props[cuda.device_attribute.MAX_BLOCK_DIM_Z])
+print("  Maximum grid dimensions: ", props[cuda.device_attribute.MAX_GRID_DIM_X], "x", props[cuda.device_attribute.MAX_GRID_DIM_Y], "x", props[cuda.device_attribute.MAX_GRID_DIM_Z])
+
+# Set the desired GPU device
+device.set()
