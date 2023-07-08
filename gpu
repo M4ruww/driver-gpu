@@ -3,7 +3,7 @@ import pycuda.driver as cuda
 # Initialize CUDA
 cuda.init()
 
-# Get the number of available GPU devices
+# Get the number of available GPU devices 
 num_gpus = cuda.Device.count()
 print("Number of available GPUs:", num_gpus)
 
