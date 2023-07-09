@@ -13,7 +13,7 @@ device_idx = 0
 # Create a CUDA device object
 device = cuda.Device(device_idx)
 
-# Get device properties
+# Get device properties here
 props = device.get_attributes()
 print("Device Properties:")
 print("  Device name:", cuda.Device.name(), " (ID:", device_idx, ")")
